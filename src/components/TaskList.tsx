@@ -19,7 +19,7 @@ export function TaskList() {
     if (newTaskTitle.trim().length === 0){
       console.log('Title is empty, task will not be created.');
     } else {
-      const newId = Math.floor((Math.random() * 100) + 1);
+      const newId = Math.random();
       const newTask: Task = {id: newId, title: newTaskTitle, isComplete: false};
       const newTasks: Task[] = tasks;
       tasks.push(newTask)
@@ -31,12 +31,15 @@ export function TaskList() {
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    const newTasks = tasks;
-    newTasks.forEach(element => {
-      if (element.id === id) {
-        element.isComplete = !(element.isComplete.valueOf());
-      }
-    });
+    const newTasks = tasks.map(task => { 
+        if (task.id === id){
+          task.isComplete = !task.isComplete;
+          return task;
+        } else {
+          return task;
+        }
+      });
+    
     setTasks(newTasks);
   }
 
